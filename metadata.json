@@ -1,0 +1,6 @@
+{
+  "name": "Weather Intelligence App",
+  "description": "A responsive, client-side React application powered by Open-Meteo APIs that provides real-time conditions, a 7-day extended forecast, and smart weather recommendations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
