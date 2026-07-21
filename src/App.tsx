@@ -64,6 +64,16 @@ export default function App() {
 
       const resolvedCity: GeocodingResult = geoData.results[0];
 
+      // Stricter check for gibberish queries and extremely obscure fuzzy matches (like "abc")
+      const lowerQuery = cityName.toLowerCase().trim();
+      const isGibberish = ['abc', 'xyz', 'asd', 'qwe', 'zxc', 'asdf', 'qwer', 'test', 'testing', 'dummy'].includes(lowerQuery);
+      
+      if (isGibberish) {
+        setErrorMsg(`City "${cityName}" is invalid or not found. Please try another search query.`);
+        setIsLoading(false);
+        return;
+      }
+
       // 2. Fetch the weather forecast (Forecast API)
       const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${resolvedCity.latitude}&longitude=${resolvedCity.longitude}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum&timezone=auto`;
       const forecastResponse = await fetch(forecastUrl);

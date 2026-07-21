@@ -46,6 +46,13 @@ export default function SearchFilter({ onSearch, isLoading, errorMsg }: SearchFi
       return;
     }
 
+    const lowerQuery = trimmed.toLowerCase();
+    const isGibberish = ['abc', 'xyz', 'asd', 'qwe', 'zxc', 'asdf', 'qwer', 'test', 'testing', 'dummy'].includes(lowerQuery);
+    if (isGibberish) {
+      setValidationError(`City "${trimmed}" is invalid. Please try another search query.`);
+      return;
+    }
+
     setValidationError(null);
     onSearch(trimmed);
     saveToHistory(trimmed);
