@@ -87,3 +87,36 @@ Outputs optimized, static assets into `dist/` ready to serve via Cloudflare Page
 ```bash
 npm run build
 ```
+
+---
+
+## 🌐 Deploying to Cloudflare Pages via GitHub
+
+Follow these step-by-step instructions to export this repository from Google AI Studio and set up CI/CD deployment on **Cloudflare Pages**.
+
+### Step 1: Export from Google AI Studio to GitHub
+1. Open the **Settings** menu inside Google AI Studio (top-right gear icon or the project integration panel).
+2. Select **Export to GitHub** or **Connect to GitHub**.
+3. Authorize Google AI Studio to access your GitHub account.
+4. Choose **Create a new repository** or connect to an existing repository, then click **Export/Push**.
+5. Your files (including `package.json`, `index.html`, `vite.config.ts`, and the `src/` directory) are now synced to your GitHub repository!
+
+### Step 2: Configure Cloudflare Pages
+1. Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/).
+2. Navigate to **Workers & Pages** in the left sidebar menu.
+3. Click the **Create** button (often labeled **Create application** or **Create Page**).
+4. Select the **Pages** tab (ensure you are on Pages, not Workers).
+5. Click **Connect to Git** to link your GitHub account.
+6. Select the repository you just exported from Google AI Studio.
+
+### Step 3: Configure Build & Deployment Settings
+Configure the build parameters exactly as shown below:
+* **Framework Preset**: Select **React** or **Vite** (both work perfectly; choosing **React (Vite)** or **Vite** is ideal).
+* **Build Command**: `npm run build`
+* **Build Output Directory**: `dist` (This is where Vite compiles static HTML, CSS, and JS files).
+* **Root Directory**: `/` (Leave as default unless using a monorepo structure).
+
+### Step 4: Deploy
+1. Click **Save and Deploy**.
+2. Cloudflare Pages will spin up a build container, install dependencies, compile your application using `npm run build`, and deploy the contents of the `dist` directory.
+3. Once the build succeeds, Cloudflare will provide a **Visit Site** button with a public, secure `.pages.dev` URL (e.g., `https://weather-intelligence-app.pages.dev`). Any future pushes to your GitHub repository will automatically trigger fresh, live deployments!
